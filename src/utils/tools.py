@@ -9,3 +9,7 @@ def get_function_name():
     :return: str
     """
     return inspect.stack()[1][3]
+
+
+def get_function_info():
+    return inspect.stack()[1][1]
