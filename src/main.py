@@ -2,8 +2,10 @@
 
 import sys
 
+
 def main():
-    pass
+    args = sys.argv[1:]
+    print(args)
 
 
 if __name__ == '__main__':
