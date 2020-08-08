@@ -22,9 +22,9 @@ class PathDispatcher:
         handler = self.pathmap.get((method, path), notfound_404)
         return handler(environ, start_response)
     
-    def register(self, method, path, function):
-        self.pathmap[method.lower(), path] = function
-        return function
+    def register(self, method, path, func):
+        self.pathmap[method.lower(), path] = func
+        return func
 
 
 _hello_resp = '''\
@@ -94,8 +94,15 @@ def localtime(*args):
 
 def upload(*args):
     start_response = args[1]
-    start_response('200 OK', [('Content-type', 'application/html')])
+    start_response('200 OK', [('Content-type', 'text/html')])
     resp = _upload_file
+    yield resp
+
+
+def save_file(*args):
+    respond = args[1]
+    print(respond)
+    resp = '200 OK'
     yield resp
 
 
@@ -106,7 +113,8 @@ if __name__ == '__main__':
     dispatcher = PathDispatcher()
     dispatcher.register('GET', '/hello', hello_world)
     dispatcher.register('GET', '/localtime', localtime)
-    dispatcher.register('POST', '/upload', upload)
+    dispatcher.register('get', '/upload', upload)
+    dispatcher.register('post', '/upload?', save_file)
     
     # Launch a basic server
     httpd = make_server('', 8080, dispatcher)
