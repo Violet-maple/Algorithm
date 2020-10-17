@@ -37,10 +37,16 @@
 
 如果在record里有记录，说明start需要刷新， 取当前start和record[char]里的最大值作为新的start即可。
 """
+import random
+import string
+
+from Tools.utils import timer
 
 
-class Solution(object):
+# 方法一 （两次 Max耗时）
+class Solution1(object):
     
+    @timer
     def lengthOfLongestSubstring(self, s):
         """
         :type s: str
@@ -56,5 +62,41 @@ class Solution(object):
         return res
 
 
+# 方式二 效率高一点点
+class Solution2:
+    @timer
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        # 存储历史循环中最长的子串长度
+        max_len = 0
+        # 判断传入的字符串是否为空
+        if s is None or len(s) == 0:
+            return max_len
+        # 定义一个字典，存储不重复的字符和字符所在的下标
+        str_dict = {}
+        # 存储每次循环中最长的子串长度
+        # one_max = 0
+        # 记录最近重复字符所在的位置+1
+        start = 0
+        for i in range(len(s)):
+            # 判断当前字符是否在字典中和当前字符的下标是否大于等于最近重复字符的所在位置
+            if s[i] in str_dict and str_dict[s[i]] >= start:
+                # 记录当前字符的值+1
+                start = str_dict[s[i]]
+            # 在此次循环中，最大的不重复子串的长度
+            one_max = i - start + 1
+            # 把当前位置覆盖字典中的位置
+            str_dict[s[i]] = i
+            # 比较此次循环的最大不重复子串长度和历史循环最大不重复子串长度
+            max_len = max(max_len, one_max)
+        return max_len - 1
+
+
 if __name__ == '__main__':
-    print(Solution().lengthOfLongestSubstring('pwwkew'))
+    value = ''.join((random.choice(string.ascii_letters) for _ in range(10000000)))
+    print('ok')
+    print(Solution1().lengthOfLongestSubstring(value))
+    print(Solution2().lengthOfLongestSubstring(value))
