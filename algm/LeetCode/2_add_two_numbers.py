@@ -32,40 +32,44 @@ class ListNode(object):
 class Solution(object):
     
     @staticmethod
-    def addTwoNumbers(l1, l2):
+    def addTwoNumbers(l1: ListNode, l2: ListNode):
         """
         :type l1: ListNode
         :type l2: ListNode
         :rtype: ListNode
         """
-        temp = ListNode(0)
-        l3 = temp
-        a = 0
+        node = ListNode(0)
+        temp = node
+        val = 0
         # 当l1不为空或者l2不为空或者a不等于0的时候
-        while l1 or l2 or a != 0:
-            if l1:
-                # a等于a加上l1当前的值
-                a += l1.val
-                # l1的指针指向下一个
-                l1 = l1.next
-            if l2:
-                a += l2.val
-                l2 = l2.next
-                # temp的下一个的值就是 a%10
-            temp.next = ListNode(a % 10)
+        while l1 or l2 or val:
+            val, cur = divmod(val + (l1.val if l1 else 0) + l2.val if l2 else 0, 10)
+            temp.next = ListNode(cur)
             temp = temp.next
-            a = a // 10
-        # l3代替temp来输出链表
-        return l3.next
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        
+        return node.next
+    
+    @staticmethod
+    def generateList(l: list) -> ListNode:
+        node = ListNode(0)
+        temp = node
+        for val in l:
+            temp.next = ListNode(val)
+            temp = temp.next
+        return node.next
+    
+    @staticmethod
+    def printList(l: ListNode):
+        while l:
+            print("%d, " % l.val, end='')
+            l = l.next
+        print('')
 
 
 if __name__ == '__main__':
-    listNode1 = ListNode(2)
-    listNode1.next = ListNode(4)
-    listNode1.next.next = ListNode(3)
-    
-    listNode2 = ListNode(5)
-    listNode2.next = ListNode(6)
-    listNode2.next.next = ListNode(4)
+    listNode1 = Solution.generateList([2, 4, 3])
+    listNode2 = Solution.generateList([5, 6, 4])
     ret = Solution().addTwoNumbers(listNode1, listNode2)
     print(ret.value)
