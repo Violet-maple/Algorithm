@@ -20,5 +20,5 @@ class Solution(object):
         while p2 < len(nums2):
             res.append(nums2[p2])
             p2 += 1
-        print res
+        print(res)
         return res[len(res) // 2] if len(res) % 2 == 1 else (res[len(res) // 2 - 1] + res[len(res) // 2]) * 1.0 / 2
