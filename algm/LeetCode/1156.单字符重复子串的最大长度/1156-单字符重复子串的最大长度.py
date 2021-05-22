@@ -1,3 +1,8 @@
+# coding: utf-8
+
+from collections import Counter
+
+
 class Solution(object):
     def maxRepOpt1(self, text):
         """
@@ -6,35 +11,35 @@ class Solution(object):
         """
         if len(text) == text.count(text[0]):
             return len(text)
-        record = collections.Counter(text)
+        record = Counter(text)
         start, end = 0, 1
         cur, nxt, idx_nxt = text[0], None, 0
         res = 1
-        while end < len(text):           
-            if text[end] != cur :
+        while end < len(text):
+            if text[end] != cur:
                 if nxt is None:
-                    nxt = text[end] #ÕÒµ½ÁËµÚÒ»¸öÒì×Ö·û
+                    nxt = text[end]  # ï¿½Òµï¿½ï¿½Ëµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
                     idx_nxt = end
-                else: #µ±Ç°¶ÎÒÑ¾­Íê³É
-                    l = end - 1 - start + 1 #¼ÆËã°üÀ¨Ò»¸öÒì×Ö·ûµÄÍ¬×Ö·û×Ó´®³¤¶È
-                    if l <= record[text[start]]: #ÓÐ¶àµÄÍ¬×Ö·û¿ÉÒÔ°ÑÕâ¸ö¼ÐÔÚÖÐ¼äµÄÍ¬×Ö·û»»µô
-                        res = max(res, l)
+                else:  # ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½
+                    sub = end - 1 - start + 1  # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Í¬ï¿½Ö·ï¿½ï¿½Ó´ï¿½ï¿½ï¿½ï¿½ï¿½
+                    if sub <= record[text[start]]:  # ï¿½Ð¶ï¿½ï¿½Í¬ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½Í¬ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½
+                        res = max(res, sub)
                     else:
-                        res = max(res, l - 1) #Ö»ÄÜÓÃÄ¿Ç°×Ö´®µÄ±ß½çÍ¬×Ö·û¸úÒì×Ö·û½»»»
+                        res = max(res, sub - 1)  # Ö»ï¿½ï¿½ï¿½ï¿½Ä¿Ç°ï¿½Ö´ï¿½ï¿½Ä±ß½ï¿½Í¬ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½
 
                     cur = nxt
                     nxt = None
                     start, end = idx_nxt, idx_nxt
                     idx_nxt = 0
-            if end == len(text) - 1: #µ½ÊäÈëÖÕµãÁË
+            if end == len(text) - 1:  # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½
                 # print end
-                l = end  - start + 1 #¼ÆËã°üÀ¨Ò»¸öÒì×Ö·ûµÄÍ¬×Ö·û×Ó´®³¤¶È
+                sub = end - start + 1  # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Í¬ï¿½Ö·ï¿½ï¿½Ó´ï¿½ï¿½ï¿½ï¿½ï¿½
                 # print l
-                if l <= record[text[start]]: #ÓÐ¶àµÄÍ¬×Ö·û¿ÉÒÔ°ÑÕâ¸ö¼ÐÔÚÖÐ¼äµÄÍ¬×Ö·û»»µô
-                    res = max(res, l)
+                if sub <= record[text[start]]:  # ï¿½Ð¶ï¿½ï¿½Í¬ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½Í¬ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½
+                    res = max(res, sub)
                 else:
-                    res = max(res, l - 1) #Ö»ÄÜÓÃÄ¿Ç°×Ö´®µÄ±ß½çÍ¬×Ö·û¸úÒì×Ö·û½»»»
-                
+                    res = max(res, sub - 1)  # Ö»ï¿½ï¿½ï¿½ï¿½Ä¿Ç°ï¿½Ö´ï¿½ï¿½Ä±ß½ï¿½Í¬ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½
+
             # print text[start:end + 1]
             end += 1
             # print end

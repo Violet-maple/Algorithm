@@ -15,5 +15,4 @@ class Solution(object):
                 break
         # print i, j
         # print s, nums
-        return len(s) - i - (len(s) - 1 -j)
-                
+        return len(s) - i - (len(s) - 1 - j)

@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class Solution(object):
     def threeSumSmaller(self, nums, target):
         """
@@ -8,14 +10,14 @@ class Solution(object):
         res = 0
         nums.sort()
         for i, num in enumerate(nums):
-            # ÏÖÔÚÒªÔÚ±Èi´óµÄÏÂ±êÀï£¬ÕÒÄÜ×éºÏ³ötarget - num µÄÁ½¸öÊıµÄ×éºÏ
+            # ç°åœ¨è¦åœ¨æ¯”iå¤§çš„ä¸‹æ ‡é‡Œï¼Œæ‰¾èƒ½ç»„åˆå‡ºtarget - num çš„ä¸¤ä¸ªæ•°çš„ç»„åˆ
             t = target - num
             left, right = i + 1, len(nums) - 1
             while left < right:
                 if nums[left] + nums[right] >= t:
-                    right -= 1 #ºÍÌ«´óÁË£¬³¢ÊÔ°ÑºÍËõĞ¡
+                    right -= 1  # å’Œå¤ªå¤§äº†ï¼Œå°è¯•æŠŠå’Œç¼©å°
                 elif nums[left] + nums[right] < t:
-                    res += right - left #ÔÚÕâÖÖÇé¿öÏÂ£¬left¿ÉÒÔÓë¡¾left + 1£¬ right¡¿¼äÈÎÒâÒ»¸öÊı×é³ÉÒ»×é´ğ°¸
+                    res += right - left  # åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œleftå¯ä»¥ä¸ã€left + 1ï¼Œ rightã€‘é—´ä»»æ„ä¸€ä¸ªæ•°ç»„æˆä¸€ç»„ç­”æ¡ˆ
                     left += 1
 
         return res

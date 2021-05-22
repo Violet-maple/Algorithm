@@ -4,13 +4,13 @@ class Solution(object):
         :type candies: List[int]
         :rtype: int
         """
-        #Ê®¸öÌÇ¹û£¬ÈýÖÖ£¬Òª·ÖÎå¸ö£¬´ð°¸ÊÇÈý
-        #°Ë¸öÌÇ¹û£¬°ËÖÖ£¬ Òª·ÖËÄ¸ö£¬´ð°¸ÊÇËÄ
-        #Ê®¸öÌÇ¹û£¬ÁùÖÖ£¬Òª·ÖÎå¸ö£¬´ð°¸ÊÇÎå
-#         hashmap = dict()
-#         for c in candies:
-#             hashmap[c] = hashmap.get(c, 0) + 1
-            
-#         cnt = len(hashmap.keys())
-        
-        return min(len(set(candies)), len(candies)/ 2)
+        # Ê®ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        # ï¿½Ë¸ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ Òªï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        # Ê®ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        #         hashmap = dict()
+        #         for c in candies:
+        #             hashmap[c] = hashmap.get(c, 0) + 1
+
+        #         cnt = len(hashmap.keys())
+
+        return min(len(set(candies)), len(candies) // 2)

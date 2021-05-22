@@ -37,13 +37,62 @@
 
 如果在record里有记录，说明start需要刷新， 取当前start和record[char]里的最大值作为新的start即可。
 """
+
+import time
 import random
 import string
+from functools import wraps
+
+
+def timer(func):
+    @wraps(func)
+    def wrap(*args):
+        st = time.time()
+        result = func.__call__(*args)
+        print(time.time() - st)
+        return result
+
+    return wrap
 
 
 # 方法1 最优解
 class Solution:
-    
+
+    @timer
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        ans, temp = 0, ''
+        for char in s:
+            if char in temp:
+                temp = temp[temp.index(char) + 1:]
+            temp += char
+            if len(temp) > ans:
+                ans = len(temp)
+        return ans
+
+    @timer
+    def long_string(self, s):
+        ans, temp = 0, ""
+        for char in s:
+            if char in temp:
+                ans = len(temp) if len(temp) > ans else ans
+                temp = temp[temp.index(char) + 1:]
+            temp += char
+        return max(len(temp), ans)
+
+    @timer
+    def long_strings(self, s):
+        ans, temp = 0, ""
+        for char in s:
+            if char in temp:
+                ans = max(ans, len(temp))
+                temp = temp[temp.index(char) + 1:]
+            temp += char
+        return max(len(temp), ans)
+
+
+class SolutionBak:
+
+    @timer
     def lengthOfLongestSubstring(self, s: str) -> int:
         ans = temp = ''
         for char in s:
@@ -59,7 +108,8 @@ class Solution:
 
 
 class Solution1(object):
-    
+
+    @timer
     def lengthOfLongestSubstring(self, s):
         """
         :type s: str
@@ -77,7 +127,8 @@ class Solution1(object):
 
 # 方式3 效率高一点点
 class Solution2:
-    
+
+    @timer
     def lengthOfLongestSubstring(self, s):
         """
         :type s: str
@@ -109,8 +160,11 @@ class Solution2:
 
 
 if __name__ == '__main__':
-    value = ''.join((random.choice(string.ascii_letters) for _ in range(100000)))
+    value = ''.join((random.choice(string.ascii_letters) for _ in range(1000000)))
     print('ok')
     print(Solution().lengthOfLongestSubstring(value))
-    print(Solution1().lengthOfLongestSubstring(value))
-    print(Solution2().lengthOfLongestSubstring(value))
+    print(Solution().long_string(value))
+    print(Solution().long_strings(value))
+    # print(SolutionBak().lengthOfLongestSubstring(value))
+    # print(Solution1().lengthOfLongestSubstring(value))
+    # print(Solution2().lengthOfLongestSubstring(value))

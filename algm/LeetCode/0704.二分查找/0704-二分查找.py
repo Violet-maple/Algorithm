@@ -7,14 +7,18 @@ class Solution(object):
         """
         left = 0
         right = len(nums) - 1
-        while(left <= right):
-            mid = (left + right) / 2
+        while left <= right:
+            mid = int(left + (right-left) / 2)
             if nums[mid] < target:
                 left = mid + 1
-            elif nums[mid ] > target:
+            elif nums[mid] > target:
                 right = mid - 1
             elif nums[mid] == target:
                 # print nums[left]
                 return mid
-
         return -1
+
+
+if __name__ == '__main__':
+    p = Solution().search([2, 2, 4, 7, 8], 4)
+    print(p)

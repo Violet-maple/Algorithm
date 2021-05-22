@@ -7,4 +7,4 @@ class Solution(object):
         """
         arr.sort()
         m = arr[(len(arr) - 1) // 2]
-        return sorted(arr, key = lambda x: abs(x - m))[-k:]
+        return sorted(arr, key=lambda x: abs(x - m))[-k:]

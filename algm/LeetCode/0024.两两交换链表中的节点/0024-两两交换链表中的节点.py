@@ -17,10 +17,10 @@ class Solution(object):
 
         first = head
         second = head.next
-        
+
         tail = second.next
         first.next = self.swapPairs(tail)
         second.next = first
         dummy.next = second
-        
+
         return dummy.next

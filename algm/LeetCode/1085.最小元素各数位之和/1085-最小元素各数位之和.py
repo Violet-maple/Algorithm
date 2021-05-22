@@ -11,3 +11,8 @@ class Solution(object):
             s += tmp
         # print s
         return 1 - s % 2
+
+
+if __name__ == '__main__':
+    p = Solution().sumOfDigits([23])
+    print(p)

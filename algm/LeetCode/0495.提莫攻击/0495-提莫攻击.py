@@ -15,9 +15,9 @@ class Solution(object):
         res = 0
         l = len(timeSeries)
         for i in range(l - 1):
-            if timeSeries[i] + duration <= timeSeries[i+1]:        
+            if timeSeries[i] + duration <= timeSeries[i + 1]:
                 res += duration
             else:
-                res += timeSeries[i+1] - timeSeries[i]
-                
+                res += timeSeries[i + 1] - timeSeries[i]
+
         return res + duration if l else res

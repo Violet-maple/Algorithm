@@ -10,12 +10,14 @@ class Solution(object):
             return 1
         n = 1
         cnt = 1
-        while(n % K != 0):
+        while n % K != 0:
             n = (n * 10 + 1) % K
             cnt += 1
             if cnt == 100000:
-                break
-        if cnt == 100000:
-            return -1
+                return -1
         return cnt
-            
+
+
+if __name__ == '__main__':
+    p = Solution().smallestRepunitDivByK(13)
+    print(p)

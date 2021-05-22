@@ -4,7 +4,7 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        dic = {")": "(", "]":"[", "}":"{"}
+        dic = {")": "(", "]": "[", "}": "{"}
         stack = []
         for ch in s:
             if ch in ["(", "[", "{"]:
@@ -13,4 +13,4 @@ class Solution(object):
                 if not stack or dic[ch] != stack[-1]:
                     return False
                 stack.pop()
-        return len(stack) == 0 
+        return len(stack) == 0
